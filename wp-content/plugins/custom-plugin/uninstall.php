@@ -4,13 +4,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
 }
 
-$option_name = 'wporg_option';
+global $wpdb,$table_prefix;
 
-delete_option( $option_name );
-
-// for site options in Multisite
-delete_site_option( $option_name );
-
-// drop a custom database table
-global $wpdb;
-$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}mytable" );
+$wp_emp = $table_prefix.'emp';
+$dropTable = "DROP TABLE `$wp_emp`;";
+$wpdb->query($dropTable);
